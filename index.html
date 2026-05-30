@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stelvinne | Portfolio Professionnel</title>
     <style>
+        /* ACTIVATION DU DÉFILEMENT FLUIDE */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Variables de design basées sur la maquette */
         :root {
             --couleur-sombre-fond: #12141c;
@@ -48,7 +53,6 @@
             align-items: center;
         }
 
-        /* Ajustement pour que le logo s'intègre bien sans déformer la barre */
         .logo img {
             height: 35px;
             width: auto;
@@ -226,7 +230,6 @@
             text-align: justify;
         }
 
-        /* Grille d'informations personnelles */
         .info-grille {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -339,7 +342,7 @@
             line-height: 1.6;
         }
 
-        /* --- RESPONSIVE DESIGN --- */
+        /* --- RESPONSIVE DESIGN CORRIGÉ --- */
         @media (max-width: 992px) {
             .about-layout {
                 grid-template-columns: 1fr;
@@ -357,8 +360,27 @@
         }
 
         @media (max-width: 768px) {
+            /* Au lieu de cacher le menu, on l'organise proprement pour mobile */
+            .nav-conteneur {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 10px;
+            }
+
             .nav-liens {
-                display: none;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .nav-liens a {
+                font-size: 13px;
+            }
+
+            .bouton-telecharger {
+                padding: 6px 14px;
+                font-size: 12px;
             }
 
             .hero-nom {
@@ -385,10 +407,10 @@
             </a>
             <ul class="nav-liens">
                 <li><a href="#" class="actif">Accueil</a></li>
-                <li><a href="a_propos.html">À Propos</a></li>
-                <li><a href="services">Services</a></li>
+                <li><a href="#a-propos">À Propos</a></li>
+                <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#blog">Blog</a></li
+                <li><a href="#blog">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="#" class="bouton-telecharger">Mon CV</a></li>
             </ul>
@@ -461,25 +483,16 @@
                 <p class="service-description">Création d'interfaces utilisateur modernes, fluides et adaptées à tous types d'écrans (Mobiles, Tablettes, PC).</p>
             </div>
 
-            <div>
-                <span>
-                    <div class="carte-service">
-                        <span class="service-icone">⚙️</span>
-                        <h3 class="service-nom">Développement Back-End</h3>
-                        <p class="service-description">Conception de systèmes robustes et évolutifs pour gérer les données et la logique métier de vos applications.</p>
-                    </div>
-                </span>
+            <div class="carte-service">
+                <span class="service-icone">⚙️</span>
+                <h3 class="service-nom">Développement Back-End</h3>
+                <p class="service-description">Conception de systèmes robustes et évolutifs pour gérer les données et la logique métier de vos applications.</p>
             </div>
 
-            <div>
-                <span style="display: block; margin-top: 30px;">
-                    <div class="carte-service">
-                        <span class="service-icone">📱</span>
-                        <h3 class="service-nom">Applications Mobiles</h3>
-                        <p class="service-description">Développement d'applications mobiles natives et hybrides pour iOS et Android, offrant une expérience utilisateur optimale.</p>
-                    </div>
-
-                </span>
+            <div class="carte-service">
+                <span class="service-icone">📱</span>
+                <h3 class="service-nom">Applications Mobiles</h3>
+                <p class="service-description">Développement d'applications mobiles natives et hybrides pour iOS et Android, offrant une expérience utilisateur optimale.</p>
             </div>
 
             <div class="carte-service">
