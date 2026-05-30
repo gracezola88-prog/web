@@ -100,9 +100,11 @@
             display: block;
         }
 
-        .contact-titre {
+        /* Correction ici : "contact-title" pour correspondre au HTML */
+        .contact-title {
             font-size: 2.5rem;
             font-weight: 700;
+            word-wrap: break-word;
         }
 
         /* Grille des réseaux sociaux */
@@ -152,6 +154,7 @@
         .reseau-action {
             font-size: 13px;
             color: var(--couleur-texte-secondaire);
+            word-break: break-all; /* Évite que l'adresse mail trop longue ne dépasse de la carte */
         }
 
         /* Attribution des couleurs individuelles aux icônes au survol */
@@ -173,23 +176,40 @@
         .email .icone-cadre { background-color: rgba(234, 67, 53, 0.1); color: var(--email); }
         .email:hover .icone-cadre { background-color: var(--email); color: white; }
 
-        /* --- RESPONSIVE --- */
+        /* --- RESPONSIVE AJUSTÉ --- */
         @media (max-width: 768px) {
             .nav-conteneur {
                 flex-direction: column;
                 gap: 15px;
+                padding: 15px;
+            }
+            .nav-liens {
+                gap: 15px;
+                flex-wrap: wrap; /* Permet aux liens du menu de revenir à la ligne proprement sur petit écran */
+                justify-content: center;
             }
             .grille-reseaux {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
-            .contact-titre {
-                font-size: 2rem;
+            /* La classe est désormais bien ciblée */
+            .contact-title {
+                font-size: 1.8rem;
             }
         }
 
         @media (max-width: 480px) {
+            .section-contact {
+                margin: 30px auto;
+            }
+            .nav-liens a {
+                font-size: 13px;
+            }
             .grille-reseaux {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* Une seule colonne sur les petits téléphones */
+            }
+            .carte-reseau {
+                padding: 20px 15px;
             }
         }
     </style>
@@ -234,10 +254,8 @@
                 </div>
                 <span class="reseau-nom">Telegram</span>
                 <span class="reseau-action">Me joindre rapidement</span>
-
             </a>
             
-
             <a href="mailto:stelvinne@gmail.com" class="carte-reseau email">
                 <div class="icone-cadre">
                     <img src="email.png" alt="Logo E-mail" style="width: 30px; height: 30px; object-fit: contain;">
