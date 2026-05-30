@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stelvinne | CV</title>
+    <style>
+        :root {
+            --couleur-sombre-fond: #12141c;
+            --couleur-sombre-carte: #181b25;
+            --couleur-accent: #e65f49;
+            --couleur-texte-principal: #ffffff;
+            --couleur-texte-secondaire: #a0a5b5;
+            --police-principale: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--police-principale);
+            background-color: var(--couleur-sombre-fond);
+            color: var(--couleur-texte-principal);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            width: 100%;
+            background: var(--couleur-sombre-carte);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-conteneur {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-liens {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-liens a {
+            text-decoration: none;
+            color: var(--couleur-texte-secondaire);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-liens a:hover, .nav-liens a.actif {
+            color: var(--couleur-accent);
+        }
+
+        .nav-liens a.bouton-telecharger {
+            background-color: var(--couleur-accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .nav-liens a.bouton-telecharger:hover {
+            background-color: #f1735e;
+            color: white;
+        }
+
+        /* --- STRUCTURE DU CV --- */
+        .cv-conteneur {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            flex: 1;
+        }
+
+        /* Colonne Gauche (Profil & Skills) */
+        .colonne-gauche {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .profil-carte {
+            background-color: var(--couleur-sombre-carte);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .profil-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid var(--couleur-accent);
+        }
+
+        .profil-nom {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .profil-titre {
+            color: var(--couleur-accent);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+        }
+
+        .profil-infos {
+            text-align: left;
+            font-size: 14px;
+            color: var(--couleur-texte-secondaire);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+        }
+
+        /* Blocs de compétences */
+        .bloc-cv {
+            background-color: var(--couleur-sombre-carte);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .titre-bloc {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255,255,255,0.05);
+        }
+
+        .titre-bloc::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--couleur-accent);
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .skill-barre {
+            width: 100%;
+            height: 8px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progression {
+            height: 100%;
+            background-color: var(--couleur-accent);
+            border-radius: 4px;
+        }
+
+        /* Colonne Droite (Expériences & Études) */
+        .colonne-droite {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .cv-item {
+            margin-bottom: 25px;
+            padding-left: 20px;
+            border-left: 2px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .cv-item::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 6px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--couleur-accent);
+        }
+
+        .cv-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .cv-item-titre {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .cv-item-soustitre {
+            color: var(--couleur-accent);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .cv-item-dates {
+            font-size: 12px;
+            color: var(--couleur-texte-secondaire);
+            margin-bottom: 10px;
+            display: inline-block;
+            background-color: rgba(255,255,255,0.03);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .cv-item-description {
+            color: var(--couleur-texte-secondaire);
+            font-size: 14px;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 850px) {
+            .cv-conteneur {
+                grid-template-columns: 1fr;
+            }
+            .nav-conteneur {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-liens {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-conteneur">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Stelvinne Logo">
+            </a>
+            <ul class="nav-liens">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="a_propos.html">À Propos</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="#" class="actif bouton-telecharger">Mon CV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="cv-conteneur">
+        
+        <aside class="colonne-gauche">
+            
+            <div class="profil-carte">
+                <img src="photo.png" alt="Ngasiela Zola Deograce" class="profil-img">
+                <h1 class="profil-nom">Ngasiela Zola D.</h1>
+                <p class="profil-titre">Développeur Fullstack <br> Python / Django</p>
+                
+                <div class="profil-infos">
+                    <div>📍 Kinshasa, RDC</div>
+                    <div>✉️ stelvinne@gmail.com</div>
+                    <div>📞 +243 983 558 864</div>
+                </div>
+            </div>
+
+            <div class="bloc-cv">
+                <h2 class="titre-bloc">Compétences</h2>
+                
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Backend (Python, Django)</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-barre">
+                        <div class="skill-progression" style="width: 90%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Frontend (HTML5, CSS3, JS)</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-barre">
+                        <div class="skill-progression" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Mobile (Flutter, Dart)</span>
+                        <span>55%</span>
+                    </div>
+                    <div class="skill-barre">
+                        <div class="skill-progression" style="width: 55%;"></div>
+                    </div>
+                </div>
+
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span>Sécurité & Réseaux (Nmap, Kali)</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="skill-barre">
+                        <div class="skill-progression" style="width: 50%;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </aside>
+
+        <section class="colonne-droite">
+            
+            <div class="bloc-cv">
+                <h2 class="titre-bloc">Profil Professionnel</h2>
+                <p style="color: var(--couleur-texte-secondaire); font-size: 15px;">
+                    Développeur informatique passionné, spécialisé dans la conception d'applications web robustes avec Python/Django et de solutions mobiles. Rigoureux et curieux, j'intègre des notions de cybersécurité dès la phase de développement afin de garantir des architectures applicatives fiables et hautement sécurisées.
+                </p>
+            </div>
+
+            <div class="bloc-cv">
+                <h2 class="titre-bloc">Formations</h2>
+                
+                <div class="cv-item">
+                    <h3 class="cv-item-titre">Licence 1 (L1) en Sciences Informatiques</h3>
+                    <p class="cv-item-soustitre">Université Protestante au Congo (UPC)</p>
+                    <span class="cv-item-dates">Année Académique 2025 - 2026</span>
+                    <p class="cv-item-description">Parcours LMD axé sur les fondements des algorithmes, des structures de données et de l'ingénierie logicielle.</p>
+                </div>
+            </div>
+
+            <div class="bloc-cv">
+                <h2 class="titre-bloc">Projets Clés & Expériences</h2>
+                
+                <div class="cv-item">
+                    <h3 class="cv-item-titre">Développement d'une Architecture SaaS Multi-tenant</h3>
+                    <p class="cv-item-soustitre">Projet Personnel</p>
+                    <span class="cv-item-dates">En cours</span>
+                    <p class="cv-item-description">Conception complète d'un projet de type logiciel en tant que service (SaaS) intégrant l'isolation des bases de données et la gestion technique du multi-tenant sur serveur.</p>
+                </div>
+
+                <div class="cv-item">
+                    <h3 class="cv-item-titre">Application Mobile "Bind"</h3>
+                    <p class="cv-item-soustitre">Développeur Flutter</p>
+                    <span class="cv-item-dates">2026</span>
+                    <p class="cv-item-description">Création d'une application mobile dotée d'aspects sociaux. Implémentation d'une fonctionnalité complexe de session chronométrée permettant une déconnexion automatique de l'utilisateur.</p>
+                </div>
+
+                <div class="cv-item">
+                    <h3 class="cv-item-titre">Rédaction d'un Ouvrage Technique sur Nmap</h3>
+                    <p class="cv-item-soustitre">Auteur & Chercheur en Cybersécurité</p>
+                    <span class="cv-item-dates">2026</span>
+                    <p class="cv-item-description">Rédaction d'un livre complet d'environ 100 pages détaillant l'utilisation des commandes Nmap à travers des scénarios et exemples réels de tests de pénétration.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
