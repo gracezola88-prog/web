@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stelvinne | Portfolio Professionnel</title>
+    <style>
+        /* Variables de design basées sur la maquette */
+        :root {
+            --couleur-sombre-fond: #12141c;
+            --couleur-sombre-carte: #181b25;
+            --couleur-accent: #e65f49;
+            --couleur-texte-principal: #ffffff;
+            --couleur-texte-secondaire: #a0a5b5;
+            --police-principale: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--police-principale);
+            background-color: var(--couleur-sombre-fond);
+            color: var(--couleur-texte-principal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- BARRE DE NAVIGATION --- */
+        header {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            background: transparent;
+        }
+
+        .nav-conteneur {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 25px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Ajustement pour que le logo s'intègre bien sans déformer la barre */
+        .logo img {
+            height: 35px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .nav-liens {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-liens a {
+            text-decoration: none;
+            color: var(--couleur-texte-principal);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-liens a:hover, .nav-liens a.actif {
+            color: var(--couleur-accent);
+        }
+
+        .bouton-telecharger {
+            border: 2px solid var(--couleur-accent);
+            color: var(--couleur-texte-principal);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .bouton-telecharger:hover {
+            background-color: var(--couleur-accent);
+            color: white;
+        }
+
+        /* --- EN-TÊTE PRINCIPAL (HERO SECTION) --- */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 20px 60px 20px;
+            background: linear-gradient(rgba(18, 20, 28, 0.85), rgba(18, 20, 28, 0.95)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200') no-repeat center center/cover;
+        }
+
+        .hero-contenu {
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-avatar-cadre {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 25px;
+            background-color: #252836;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-avatar-cadre img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-nom {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .hero-titre {
+            font-size: 1.1rem;
+            color: var(--couleur-texte-secondaire);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* --- CONTENEUR DES SECTIONS --- */
+        .section-globale {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 20px;
+        }
+
+        /* --- SECTION À PROPOS (ABOUT ME) --- */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 4fr 7fr;
+            gap: 60px;
+            align-items: start;
+            position: relative;
+        }
+
+        .about-image-cadre {
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: var(--couleur-sombre-carte);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            aspect-ratio: 4 / 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image-cadre img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-contenu {
+            position: relative;
+        }
+
+        .numero-section {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 4rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.03);
+            line-height: 1;
+        }
+
+        .about-surtitre {
+            color: var(--couleur-accent);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .about-titre {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .about-titre::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 2px;
+            background-color: var(--couleur-accent);
+        }
+
+        .about-texte {
+            color: var(--couleur-texte-secondaire);
+            font-size: 15px;
+            margin-bottom: 35px;
+            text-align: justify;
+        }
+
+        /* Grille d'informations personnelles */
+        .info-grille {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 30px;
+            margin-bottom: 35px;
+        }
+
+        .info-item {
+            font-size: 14px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: var(--couleur-texte-principal);
+            display: inline-block;
+            width: 90px;
+        }
+
+        .info-valeur {
+            color: var(--couleur-texte-secondaire);
+        }
+
+        .bouton-action {
+            display: inline-block;
+            background-color: var(--couleur-accent);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .bouton-action:hover {
+            background-color: #d44d38;
+        }
+
+        /* --- SECTION SERVICES --- */
+        .services-entete {
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .services-surtitre {
+            color: var(--couleur-accent);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .services-titre {
+            font-size: 2.2rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .services-titre::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 50px;
+            height: 2px;
+            background-color: var(--couleur-accent);
+        }
+
+        .grille-services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .carte-service {
+            background-color: var(--couleur-sombre-carte);
+            padding: 40px 30px;
+            border-radius: 6px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid transparent;
+        }
+
+        .carte-service:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-top: 3px solid var(--couleur-accent);
+        }
+
+        .service-icone {
+            font-size: 2rem;
+            color: var(--couleur-accent);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .service-nom {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            color: var(--couleur-texte-secondaire);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) {
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .about-image-cadre {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .grille-services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-liens {
+                display: none;
+            }
+
+            .hero-nom {
+                font-size: 2.2rem;
+            }
+
+            .grille-services {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grille {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-conteneur">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Stelvinne Logo">
+            </a>
+            <ul class="nav-liens">
+                <li><a href="#" class="actif">Accueil</a></li>
+                <li><a href="a_propos.html">À Propos</a></li>
+                <li><a href="services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#blog">Blog</a></li
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" class="bouton-telecharger">Mon CV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-contenu">
+            <div class="hero-avatar-cadre">
+                <img src="logo.png" alt="Stelvinne Avatar">
+            </div>
+            <h1 class="hero-nom">Stelvinne</h1>
+            <p class="hero-titre">Développeur & Concepteur Web Professionnel</p>
+        </div>
+    </section>
+
+    <section class="section-globale" id="a-propos">
+        <div class="about-layout">
+            
+            <div class="about-image-cadre">
+                <img src="photo.png" alt="Stelvinne Portrait">
+            </div>
+
+            <div class="about-contenu">
+                <div class="numero-section">01</div>
+                <span class="about-surtitre">Mon Histoire</span>
+                <h2 class="about-titre">À Propos de Moi</h2>
+                <p class="about-texte">
+                    Bonjour ! Je suis Stelvinne, un développeur passionné par la création d'interfaces numériques modernes, esthétiques et hautement performantes. Fort d'une expertise technique pointue, j'accompagne mes clients dans la concrétisation de leurs visions, du design initial jusqu'au déploiement de solutions web et mobiles entièrement responsives et sur-mesure.
+                </p>
+
+                <div class="info-grille">
+                    <div class="info-item">
+                        <span class="info-label">Noms :</span>
+                        <span class="info-valeur">Ngasiela zola deograce</span>
+                    </div>
+                   
+                    <div class="info-item">
+                        <span class="info-label">Adresse :</span>
+                        <span class="info-valeur">KINSHASA, RDC</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">E-mail :</span>
+                        <span class="info-valeur">stelvinne@gmail.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Téléphone :</span>
+                        <span class="info-valeur">+243 983 558 864</span>
+                    </div>
+                </div>
+
+                <a href="#contact" class="bouton-action">Me Recruter</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section-globale" id="services" style="background-color: rgba(255,255,255,0.01); border-top: 1px solid rgba(255,255,255,0.03);">
+        <div class="services-entete">
+            <div class="numero-section" style="right: auto; left: 0;">02</div>
+            <span class="services-surtitre">Ce que je fais</span>
+            <h2 class="services-titre">Mes Services</h2>
+        </div>
+
+        <div class="grille-services">
+            
+            <div class="carte-service">
+                <span class="service-icone">💻</span>
+                <h3 class="service-nom">Développement Front-End</h3>
+                <p class="service-description">Création d'interfaces utilisateur modernes, fluides et adaptées à tous types d'écrans (Mobiles, Tablettes, PC).</p>
+            </div>
+
+            <div>
+                <span>
+                    <div class="carte-service">
+                        <span class="service-icone">⚙️</span>
+                        <h3 class="service-nom">Développement Back-End</h3>
+                        <p class="service-description">Conception de systèmes robustes et évolutifs pour gérer les données et la logique métier de vos applications.</p>
+                    </div>
+                </span>
+            </div>
+
+            <div>
+                <span style="display: block; margin-top: 30px;">
+                    <div class="carte-service">
+                        <span class="service-icone">📱</span>
+                        <h3 class="service-nom">Applications Mobiles</h3>
+                        <p class="service-description">Développement d'applications mobiles natives et hybrides pour iOS et Android, offrant une expérience utilisateur optimale.</p>
+                    </div>
+
+                </span>
+            </div>
+
+            <div class="carte-service">
+                <span class="service-icone">🔍</span>
+                <h3 class="service-nom">Stratégie & SEO</h3>
+                <p class="service-description">Optimisation complète de la structure de vos sites pour maximiser leur visibilité et leur référencement sur Google.</p>
+            </div>
+
+            <div class="carte-service">
+                <span class="service-icone">🎨</span>
+                <h3 class="service-nom">Design d'Interface (UI/UX)</h3>
+                <p class="service-description">Conception de maquettes graphiques uniques centrées sur l'expérience de navigation utilisateur.</p>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+</html>
