@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stelvinne | À Propos</title>
+    <style>
+        :root {
+            --couleur-sombre-fond: #12141c;
+            --couleur-sombre-carte: #181b25;
+            --couleur-accent: #e65f49;
+            --couleur-texte-principal: #ffffff;
+            --couleur-texte-secondaire: #a0a5b5;
+            --police-principale: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--police-principale);
+            background-color: var(--couleur-sombre-fond);
+            color: var(--couleur-texte-principal);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            width: 100%;
+            background: var(--couleur-sombre-carte);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-conteneur {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-liens {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-liens a {
+            text-decoration: none;
+            color: var(--couleur-texte-secondaire);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-liens a:hover, .nav-liens a.actif {
+            color: var(--couleur-accent);
+        }
+
+        .nav-liens a.bouton-telecharger {
+            background-color: var(--couleur-accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        /* --- CONTENU À PROPOS --- */
+        .apropos-conteneur {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .apropos-entete {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .apropos-surtitre {
+            color: var(--couleur-accent);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .apropos-titre {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .apropos-grille {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .apropos-image-cadre {
+            position: relative;
+            text-align: center;
+        }
+
+        .apropos-image {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .apropos-texte h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--couleur-accent);
+        }
+
+        .apropos-texte p {
+            color: var(--couleur-texte-secondaire);
+            margin-bottom: 20px;
+        }
+
+        /* Section Valeurs / Atouts */
+        .valeurs-grille {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .valeur-carte {
+            background-color: var(--couleur-sombre-carte);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s;
+        }
+
+        .valeur-carte:hover {
+            transform: translateY(-5px);
+        }
+
+        .valeur-icone {
+            font-size: 28px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .valeur-titre {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .valeur-desc {
+            font-size: 14px;
+            color: var(--couleur-texte-secondaire);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 850px) {
+            .apropos-grille {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .apropos-image-cadre {
+                order: -1; /* Met l'image en haut sur mobile */
+            }
+            .valeurs-grille {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .nav-conteneur {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-liens {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .apropos-titre {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-conteneur">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Stelvinne Logo">
+            </a>
+            <ul class="nav-liens">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="#" class="actif">À Propos</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="mon_cv.html" class="bouton-telecharger">Mon CV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="apropos-conteneur">
+        
+        <div class="apropos-entete">
+            <span class="apropos-surtitre">Mon Histoire</span>
+            <h1 class="apropos-titre">À Propos de Moi</h1>
+        </div>
+
+        <div class="apropos-grille">
+            
+            <div class="apropos-image-cadre">
+                <img src="photo.png" alt="Ngasiela Zola Deograce" class="apropos-image">
+            </div>
+
+            <div class="apropos-texte">
+                <h2>Moi, c'est Stelvinne</h2>
+                <p>
+                    Étudiant passionné actuellement en <strong>Licence 1 Sciences Informatiques (Système LMD) à l'Université Protestante au Congo (UPC)</strong> à Kinshasa, mon aventure avec le code a commencé bien avant les bancs de l'université. Fasciné par la création numérique, j'ai rapidement plongé en autodidacte dans l'univers du développement logiciel.
+                </p>
+                <p>
+                    Au quotidien, je me spécialise dans la construction d'architectures backend puissantes avec <strong>Python et Django</strong>, tout en concevant des interfaces mobiles fluides via <strong>Flutter</strong>. Ce qui me distingue ? Une forte curiosité pour la <strong>cybersécurité</strong>. Je passe une grande partie de mon temps libre à analyser les réseaux avec des outils comme Nmap et Kali Linux pour apprendre à concevoir des applications totalement étanches face aux vulnérabilités.
+                </p>
+                <p>
+                    Qu'il s'agisse de concevoir un système SaaS multi-tenant complexe ou d'écrire de la documentation technique, j'aime aborder chaque projet avec une logique rigoureuse et une recherche constante de performance.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="apropos-entete" style="margin-top: 40px; margin-bottom: 20px;">
+            <h2 style="font-size: 22px;">Mes Piliers au Quotidien</h2>
+        </div>
+
+        <div class="valeurs-grille">
+            
+            <div class="valeur-carte">
+                <span class="valeur-icone">🚀</span>
+                <h3 class="valeur-titre">Autonomie & Apprentissage</h3>
+                <p class="valeur-desc">Le monde informatique évolue vite. J'apprends de nouvelles technologies en continu pour proposer des solutions toujours modernes.</p>
+            </div>
+
+            <div class="valeur-carte">
+                <span class="valeur-icone">🛡️</span>
+                <h3 class="valeur-titre">Sécurité Native</h3>
+                <p class="valeur-desc">Je n'écris pas juste du code fonctionnel. Grâce à mes recherches en hacking éthique, je sécurise mes projets dès le premier fichier.</p>
+            </div>
+
+            <div class="valeur-carte">
+                <span class="valeur-icone">📊</span>
+                <h3 class="valeur-titre">Rigueur Architecturale</h3>
+                <p class="valeur-desc">Qu'il s'agisse d'organiser des bases de données isolées ou des états d'applications, j'accorde une importance capitale à la propreté du code.</p>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
