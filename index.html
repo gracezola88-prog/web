@@ -360,7 +360,6 @@
         }
 
         @media (max-width: 768px) {
-            /* Au lieu de cacher le menu, on l'organise proprement pour mobile */
             .nav-conteneur {
                 flex-direction: column;
                 gap: 15px;
@@ -431,7 +430,7 @@
         <div class="about-layout">
             
             <div class="about-image-cadre">
-                <img src="photo.png" alt="Stelvinne Portrait">
+                <img src="https://drive.google.com/file/d/1FWL8vafsqbJxow8P1zHz_6a8mAgOV6PZ/view?usp=drive_link" alt="Stelvinne Portrait">
             </div>
 
             <div class="about-contenu">
@@ -462,7 +461,7 @@
                     </div>
                 </div>
 
-                <a href="#contact" class="bouton-action">Me Recruter</a>
+                <a href="#" id="bouton-partager" class="bouton-action">Recommander</a>
             </div>
 
         </div>
@@ -510,5 +509,32 @@
         </div>
     </section>
 
+    <script>
+        document.getElementById('bouton-partager').addEventListener('click', function(e) {
+            e.preventDefault(); 
+
+            const urlSite = window.location.href; 
+            const titreSite = "Découvrez le portfolio de Stelvinne !";
+            const texteSite = "Développeur Web Fullstack Python/Django & Mobile. Regardez ses projets et services :";
+
+            if (navigator.share) {
+                navigator.share({
+                    title: titreSite,
+                    text: texteSite,
+                    url: urlSite
+                })
+                .then(() => console.log('Partage réussi !'))
+                .catch((error) => console.log('Erreur de partage :', error));
+            } else {
+                navigator.clipboard.writeText(`${texteSite} ${urlSite}`)
+                    .then(() => {
+                        alert("Le lien et la description ont été copiés dans votre presse-papiers ! Vous pouvez maintenant les coller pour les partager.");
+                    })
+                    .catch((err) => {
+                        console.error('Impossible de copier le lien : ', err);
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
