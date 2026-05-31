@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stelvinne | Services & Tarifs</title>
+    <style>
+        :root {
+            --couleur-sombre-fond: #12141c;
+            --couleur-sombre-carte: #181b25;
+            --couleur-accent: #e65f49;
+            --couleur-texte-principal: #ffffff;
+            --couleur-texte-secondaire: #a0a5b5;
+            --police-principale: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--police-principale);
+            background-color: var(--couleur-sombre-fond);
+            color: var(--couleur-texte-principal);
+            line-height: 1.7;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            width: 100%;
+            background: var(--couleur-sombre-carte);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-conteneur {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 35px;
+            width: auto;
+        }
+
+        .nav-liens {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-liens a {
+            text-decoration: none;
+            color: var(--couleur-texte-secondaire);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-liens a:hover, .nav-liens a.actif {
+            color: var(--couleur-accent);
+        }
+
+        .nav-liens a.bouton-telecharger {
+            background-color: var(--couleur-accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        /* --- STRUCTURE DE LA PAGE --- */
+        .services-conteneur {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .services-entete {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .services-surtitre {
+            color: var(--couleur-accent);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .services-titre {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        /* --- GRILLE DES TARIFS --- */
+        .grille-tarifs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .carte-tarif {
+            background-color: var(--couleur-sombre-carte);
+            padding: 40px 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .carte-tarif:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: var(--couleur-accent);
+        }
+
+        /* Badge pour le service phare (ex: Django) */
+        .badge-populaire {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: var(--couleur-accent);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tarif-icone {
+            font-size: 2.5rem;
+            color: var(--couleur-accent);
+            margin-bottom: 20px;
+        }
+
+        .tarif-nom {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tarif-prix {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--couleur-accent);
+            margin-bottom: 20px;
+        }
+
+        .tarif-prix span {
+            font-size: 14px;
+            color: var(--couleur-texte-secondaire);
+            font-weight: 400;
+        }
+
+        .tarif-liste {
+            list-style: none;
+            margin-bottom: 30px;
+            flex: 1;
+        }
+
+        .tarif-liste li {
+            font-size: 14px;
+            color: var(--couleur-texte-secondaire);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tarif-liste li::before {
+            content: "✓";
+            color: var(--couleur-accent);
+            font-weight: bold;
+        }
+
+        .bouton-choisir {
+            display: block;
+            text-align: center;
+            background-color: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: var(--couleur-texte-principal);
+            padding: 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .carte-tarif:hover .bouton-choisir, .carte-tarif.populaire .bouton-choisir {
+            background-color: var(--couleur-accent);
+            border-color: var(--couleur-accent);
+            color: white;
+        }
+
+        /* --- SECTION SPÉCIFICITÉS (FORMULAIRE) --- */
+        .section-specifique {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: var(--couleur-sombre-carte);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .form-groupe {
+            margin-bottom: 25px;
+        }
+
+        .form-groupe label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--couleur-texte-principal);
+        }
+
+        .form-groupe input, .form-groupe select, .form-groupe textarea {
+            width: 100%;
+            background-color: var(--couleur-sombre-fond);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--couleur-texte-principal);
+            padding: 12px 15px;
+            border-radius: 4px;
+            font-family: var(--police-principale);
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-groupe input:focus, .form-groupe select:focus, .form-groupe textarea:focus {
+            outline: none;
+            border-color: var(--couleur-accent);
+        }
+
+        .bouton-envoyer {
+            width: 100%;
+            background-color: var(--couleur-accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .bouton-envoyer:hover {
+            background-color: #d44d38;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .grille-tarifs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-conteneur {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-liens {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .grille-tarifs {
+                grid-template-columns: 1fr;
+            }
+            .services-titre {
+                font-size: 2rem;
+            }
+            .section-specifique {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav class="nav-conteneur">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Stelvinne Logo">
+            </a>
+            <ul class="nav-liens">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="a_propos.html">À Propos</a></li>
+                <li><a href="#" class="actif">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="mon_cv.html" class="bouton-telecharger">Mon CV</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="services-conteneur">
+        
+        <div class="services-entete">
+            <span class="services-surtitre">Tarification</span>
+            <h1 class="services-titre">Mes Offres & Services</h1>
+        </div>
+
+        <div class="grille-tarifs">
+            
+            <div class="carte-tarif">
+                <div class="tarif-icone">💻</div>
+                <h3 class="tarif-nom">Sitel Web Vitrine</h3>
+                <div class="tarif-prix">À partir de 150$</div>
+                <ul class="tarif-liste">
+                    <li>Design Responsive (Mobile & PC)</li>
+                    <li>Optimisation SEO pour Google</li>
+                    <li>Page de contact & Réseaux Sociaux</li>
+                    <li>Code Propre & Performant</li>
+                </ul>
+                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('vitrine')">Choisir cette offre</a>
+            </div>
+
+            <div class="carte-tarif populaire" style="border-color: rgba(230, 95, 73, 0.3);">
+                <div class="badge-populaire">Populaire</div>
+                <div class="tarif-icone">⚙️</div>
+                <h3 class="tarif-nom">Applications Backend & SaaS</h3>
+                <div class="tarif-prix">Sur Devis</div>
+                <ul class="tarif-liste">
+                    <li>Architecture Python / Django</li>
+                    <li>Système Multi-tenant & Base de données</li>
+                    <li>Sécurité native et gestion des rôles</li>
+                    <li>API REST robuste et évolutive</li>
+                </ul>
+                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('backend')">Demander un devis</a>
+            </div>
+
+            <div class="carte-tarif">
+                <div class="tarif-icone">📱</div>
+                <h3 class="tarif-nom">Applications Mobiles</h3>
+                <div class="tarif-prix">Sur Devis</div>
+                <ul class="tarif-liste">
+                    <li>Développement Flutter (iOS & Android)</li>
+                    <li>Interfaces fluides & UI/UX soignée</li>
+                    <li>Gestion d'états et mode hors-ligne</li>
+                    <li>Maintenance & Déploiement Stores</li>
+                </ul>
+                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('mobile')">Demander un devis</a>
+            </div>
+
+        </div>
+
+        <div class="services-entete" id="demande-specifique">
+            <span class="services-surtitre">Un besoin sur-mesure ?</span>
+            <h2 class="services-titre" style="font-size: 28px;">Décrivez votre projet</h2>
+        </div>
+
+        <div class="section-specifique">
+            <form id="formulaireWhatsApp">
+                <div class="form-groupe">
+                    <label for="nom">Votre Nom / Entreprise</label>
+                    <input type="text" id="nom" name="nom" placeholder="Ex: Jean Dupont" required>
+                </div>
+
+                <div class="form-groupe">
+                    <label for="email">Adresse E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="Ex: jean@example.com" required>
+                </div>
+
+                <div class="form-groupe">
+                    <label for="service-select">Service Principal Souhaité</label>
+                    <select id="service-select" name="service">
+                        <option value="vitrine">Site Web Vitrine</option>
+                        <option value="backend">Développement Backend / SaaS (Django)</option>
+                        <option value="mobile">Application Mobile (Flutter)</option>
+                        <option value="autre">Autre projet spécifique</option>
+                    </select>
+                </div>
+
+                <div class="form-groupe">
+                    <label for="specificites">Spécificités propres & fonctionnalités voulues</label>
+                    <textarea id="specificites" name="specificites" rows="6" placeholder="Décrivez ici vos besoins précis (Ex: Système de paiement, authentification double facteur, session chronométrée, design sombre particulier, etc...)" required></textarea>
+                </div>
+
+                <button type="submit" class="bouton-envoyer">Envoyer via WhatsApp 💬</button>
+            </form>
+        </div>
+
+    </main>
+
+    <script>
+        // Sélection automatique du service dans le menu déroulant
+        function selectionnerService(serviceId) {
+            const selectElement = document.getElementById('service-select');
+            selectElement.value = serviceId;
+        }
+
+        // Interception de l'envoi pour redirection directe vers WhatsApp
+        document.getElementById('formulaireWhatsApp').addEventListener('submit', function(e) {
+            e.preventDefault(); // Empêche le rechargement de la page
+
+            // Numéro formaté correctement pour l'API WhatsApp (sans espaces, sans le +)
+            const monNumeroWhatsApp = "243983558864"; 
+
+            // Récupération des données saisies par l'utilisateur
+            const nom = document.getElementById('nom').value;
+            const email = document.getElementById('email').value;
+            const selectService = document.getElementById('service-select');
+            const nomService = selectService.options[selectService.selectedIndex].text;
+            const specificites = document.getElementById('specificites').value;
+
+            // Alignement et mise en ordre propre des informations
+            let messageWhatsApp = `Bonjour Stelvinne ! 👋\n\n`;
+            messageWhatsApp += `*Nouvelle demande de projet depuis le Portfolio* 🚀\n`;
+            messageWhatsApp += `====================================\n\n`;
+            messageWhatsApp += `👤 *Nom / Entreprise :*\n👉 ${nom}\n\n`;
+            messageWhatsApp += `📧 *Adresse E-mail :*\n👉 ${email}\n\n`;
+            messageWhatsApp += `🛠️ *Service demandé :*\n👉 ${nomService}\n\n`;
+            messageWhatsApp += `📝 *Spécificités & Besoins :*\n"${specificites}"\n\n`;
+            messageWhatsApp += `====================================`;
+
+            // Encodage complet du message ordonné pour l'URL web
+            const messageEncode = encodeURIComponent(messageWhatsApp);
+
+            // Lien d'envoi direct
+            const lienWhatsApp = `https://wa.me/${monNumeroWhatsApp}?text=${messageEncode}`;
+
+            // Ouverture instantanée de la fenêtre WhatsApp
+            window.open(lienWhatsApp, '_blank');
+        });
+    </script>
+
+</body>
+</html>
