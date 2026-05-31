@@ -205,6 +205,7 @@
             font-weight: 600;
             font-size: 14px;
             transition: all 0.3s;
+            cursor: pointer;
         }
 
         .carte-tarif:hover .bouton-choisir, .carte-tarif.populaire .bouton-choisir {
@@ -221,6 +222,7 @@
             padding: 40px;
             border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.03);
+            scroll-margin-top: 40px; /* Évite que l'en-tête soit collé au haut de l'écran lors du clic */
         }
 
         .form-groupe {
@@ -309,6 +311,8 @@
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="a_propos.html">À Propos</a></li>
                 <li><a href="#" class="actif">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="mon_cv.html" class="bouton-telecharger">Mon CV</a></li>
             </ul>
@@ -326,7 +330,7 @@
             
             <div class="carte-tarif">
                 <div class="tarif-icone">💻</div>
-                <h3 class="tarif-nom">Sitel Web Vitrine</h3>
+                <h3 class="tarif-nom">Site Web Vitrine</h3>
                 <div class="tarif-prix">À partir de 150$</div>
                 <ul class="tarif-liste">
                     <li>Design Responsive (Mobile & PC)</li>
@@ -334,7 +338,7 @@
                     <li>Page de contact & Réseaux Sociaux</li>
                     <li>Code Propre & Performant</li>
                 </ul>
-                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('vitrine')">Choisir cette offre</a>
+                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('vitrine', 'Offre : Site Web Vitrine (À partir de 150$)\nInclus : Design Responsive, SEO Google, Page de Contact, Code Propre.')">Choisir cette offre</a>
             </div>
 
             <div class="carte-tarif populaire" style="border-color: rgba(230, 95, 73, 0.3);">
@@ -348,7 +352,7 @@
                     <li>Sécurité native et gestion des rôles</li>
                     <li>API REST robuste et évolutive</li>
                 </ul>
-                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('backend')">Demander un devis</a>
+                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('backend', 'Offre : Applications Backend & SaaS (Sur Devis)\nInclus : Architecture Django, Multi-tenant, Sécurité native, API REST.')">Demander un devis</a>
             </div>
 
             <div class="carte-tarif">
@@ -358,10 +362,10 @@
                 <ul class="tarif-liste">
                     <li>Développement Flutter (iOS & Android)</li>
                     <li>Interfaces fluides & UI/UX soignée</li>
-                    <li>Gestion d'états et mode hors-ligne</li>
+                    <li>Gestion d\'états et mode hors-ligne</li>
                     <li>Maintenance & Déploiement Stores</li>
                 </ul>
-                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('mobile')">Demander un devis</a>
+                <a href="#demande-specifique" class="bouton-choisir" onclick="selectionnerService('mobile', 'Offre : Applications Mobiles (Sur Devis)\nInclus : Dev Flutter iOS/Android, UI/UX soignée, Gestion d\'états, Déploiement Stores.')">Demander un devis</a>
             </div>
 
         </div>
@@ -371,7 +375,7 @@
             <h2 class="services-titre" style="font-size: 28px;">Décrivez votre projet</h2>
         </div>
 
-        <div class="section-specifique">
+        <div class="section-specifique" id="zone-formulaire">
             <form id="formulaireWhatsApp">
                 <div class="form-groupe">
                     <label for="nom">Votre Nom / Entreprise</label>
@@ -395,7 +399,7 @@
 
                 <div class="form-groupe">
                     <label for="specificites">Spécificités propres & fonctionnalités voulues</label>
-                    <textarea id="specificites" name="specificites" rows="6" placeholder="Décrivez ici vos besoins précis (Ex: Système de paiement, authentification double facteur, session chronométrée, design sombre particulier, etc...)" required></textarea>
+                    <textarea id="specificites" name="specificites" rows="7" placeholder="Décrivez ici vos besoins précis..." required></textarea>
                 </div>
 
                 <button type="submit" class="bouton-envoyer">Envoyer via WhatsApp 💬</button>
@@ -405,43 +409,47 @@
     </main>
 
     <script>
-        // Sélection automatique du service dans le menu déroulant
-        function selectionnerService(serviceId) {
+        // Fonction intelligente pour pré-remplir et scroller
+        function selectionnerService(serviceId, détailsOffre) {
+            // 1. Sélectionne le service dans le menu déroulant
             const selectElement = document.getElementById('service-select');
             selectElement.value = serviceId;
+
+            // 2. Pré-remplit la zone de texte avec les détails et invite à ajouter des précisions
+            const zoneTexte = document.getElementById('specificites');
+            zoneTexte.value = `${détailsOffre}\n\n[Écrivez vos précisions ou modifications ici :]\n👉 `;
+
+            // 3. Focus automatique sur la zone de texte pour que l'utilisateur n'ait plus qu'à écrire
+            zoneTexte.focus();
+            
+            // Met le curseur directement à la fin du texte
+            zoneTexte.setSelectionRange(zoneTexte.value.length, zoneTexte.value.length);
         }
 
-        // Interception de l'envoi pour redirection directe vers WhatsApp
+        // Gestion de la soumission WhatsApp
         document.getElementById('formulaireWhatsApp').addEventListener('submit', function(e) {
-            e.preventDefault(); // Empêche le rechargement de la page
+            e.preventDefault(); 
 
-            // Numéro formaté correctement pour l'API WhatsApp (sans espaces, sans le +)
             const monNumeroWhatsApp = "243983558864"; 
 
-            // Récupération des données saisies par l'utilisateur
             const nom = document.getElementById('nom').value;
             const email = document.getElementById('email').value;
             const selectService = document.getElementById('service-select');
             const nomService = selectService.options[selectService.selectedIndex].text;
             const specificites = document.getElementById('specificites').value;
 
-            // Alignement et mise en ordre propre des informations
             let messageWhatsApp = `Bonjour Stelvinne ! 👋\n\n`;
             messageWhatsApp += `*Nouvelle demande de projet depuis le Portfolio* 🚀\n`;
             messageWhatsApp += `====================================\n\n`;
             messageWhatsApp += `👤 *Nom / Entreprise :*\n👉 ${nom}\n\n`;
             messageWhatsApp += `📧 *Adresse E-mail :*\n👉 ${email}\n\n`;
             messageWhatsApp += `🛠️ *Service demandé :*\n👉 ${nomService}\n\n`;
-            messageWhatsApp += `📝 *Spécificités & Besoins :*\n"${specificites}"\n\n`;
+            messageWhatsApp += `📝 *Détails & Spécificités :*\n${specificites}\n\n`;
             messageWhatsApp += `====================================`;
 
-            // Encodage complet du message ordonné pour l'URL web
             const messageEncode = encodeURIComponent(messageWhatsApp);
-
-            // Lien d'envoi direct
             const lienWhatsApp = `https://wa.me/${monNumeroWhatsApp}?text=${messageEncode}`;
 
-            // Ouverture instantanée de la fenêtre WhatsApp
             window.open(lienWhatsApp, '_blank');
         });
     </script>

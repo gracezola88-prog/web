@@ -110,13 +110,15 @@
             display: grid;
             grid-template-columns: 1fr 1.5fr;
             gap: 50px;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 60px;
         }
 
         .apropos-image-cadre {
             position: relative;
             text-align: center;
+            position: sticky;
+            top: 40px;
         }
 
         .apropos-image {
@@ -136,6 +138,7 @@
         .apropos-texte p {
             color: var(--couleur-texte-secondaire);
             margin-bottom: 20px;
+            text-align: justify;
         }
 
         /* Section Valeurs / Atouts */
@@ -182,7 +185,8 @@
                 gap: 30px;
             }
             .apropos-image-cadre {
-                order: -1; /* Met l'image en haut sur mobile */
+                order: -1;
+                position: static;
             }
             .valeurs-grille {
                 grid-template-columns: 1fr;
@@ -235,20 +239,23 @@
 
             <div class="apropos-texte">
                 <h2>Moi, c'est Stelvinne</h2>
+                
                 <p>
-                    Étudiant passionné actuellement en <strong>Licence 1 Sciences Informatiques (Système LMD) à l'Université Protestante au Congo (UPC)</strong> à Kinshasa, mon aventure avec le code a commencé bien avant les bancs de l'université. Fasciné par la création numérique, j'ai rapidement plongé en autodidacte dans l'univers du développement logiciel.
-                </p>
-                <p>
-                    Au quotidien, je me spécialise dans la construction d'architectures backend puissantes avec <strong>Python et Django</strong>, tout en concevant des interfaces mobiles fluides via <strong>Flutter</strong>. Ce qui me distingue ? Une forte curiosité pour la <strong>cybersécurité</strong>. Je passe une grande partie de mon temps libre à analyser les réseaux avec des outils comme Nmap et Kali Linux pour apprendre à concevoir des applications totalement étanches face aux vulnérabilités.
-                </p>
-                <p>
-                    Qu'il s'agisse de concevoir un système SaaS multi-tenant complexe ou d'écrire de la documentation technique, j'aime aborder chaque projet avec une logique rigoureuse et une recherche constante de performance.
+                    Mon histoire s'est dessinée à travers les rues de Kinshasa. Né à <strong>Bumbu</strong>, j'y ai passé mes premières années avant de déménager en 2007 à <strong>Kasa-Vubu</strong> en famille, puis de m'installer définitivement à <strong>Ngiri-Ngiri</strong> en 2009. C'est précisément au cours de cette année-là qu'un déclic s'est produit. Loin d'être une simple passade, l'univers de l'informatique est devenu une véritable vocation. Depuis plus de quinze ans, cette fascination pour les technologies et ce désir insatiable de comprendre l'envers du décor numérique ne m'ont plus jamais quitté.
                 </p>
 
-                <p style="border-left: 3px solid var(--couleur-accent); padding-left: 15px; font-style: italic;">
-                    Écris ta biographie personnalisée ici... Tu peux y ajouter tes motivations personnelles, tes passions en dehors du code ou ce qui t'anime chaque jour.
+                <p>
+                    Ce qui a débuté comme une curiosité d'enfance s'est rapidement transformé en un parcours d'apprentissage rigoureux. Guidé par l'envie de créer et de maîtriser le code en autodidacte, j'ai naturellement choisi d'officialiser et d'approfondir cette passion à l'<strong>Université Protestante au Congo (UPC)</strong>, où je poursuis actuellement mes études en <strong>Licence 1 Sciences Informatiques (Système LMD)</strong>.
                 </p>
-                </div>
+
+                <p>
+                    Aujourd'hui, je mets cette persévérance au service de projets techniques concrets. Je me spécialise dans la construction d'architectures backend robustes avec <strong>Python et Django</strong>, ainsi que dans la création d'applications mobiles intuitives et modernes via <strong>Flutter</strong>. Mon profil intègre également une forte composante en <strong>cybersécurité</strong> : j'affectionne particulièrement l'analyse réseau avec des outils comme Nmap et Kali Linux afin de garantir que chaque ligne de code produite réponde aux exigences de sécurité les plus strictes.
+                </p>
+
+                <p style="border-left: 3px solid var(--couleur-accent); padding-left: 15px; font-weight: 500; color: #ffffff;">
+                    Mon ambition à long terme ? Devenir une référence incontournable en ingénierie logicielle et en cybersécurité en République Démocratique du Congo. Je ne veux pas simplement concevoir des applications, je veux bâtir des infrastructures SaaS massives, sécurisées et résilientes qui répondent aux vrais défis de l'écosystème tech africain.
+                </p>
+            </div>
 
         </div>
 
